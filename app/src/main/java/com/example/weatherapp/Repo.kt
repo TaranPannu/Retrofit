@@ -1,5 +1,7 @@
 package com.example.weatherapp
 
-class Repo(private val retrofitServices: RetrofitServices) {
+import javax.inject.Inject
+
+class Repo @Inject constructor(private val retrofitServices: RetrofitServices) {
    suspend fun getWeatherDetail(city: String) = retrofitServices.getWeatherDetail(city)
 }

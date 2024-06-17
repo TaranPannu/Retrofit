@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -49,6 +51,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0-RC")
     implementation("androidx.lifecycle:lifecycle-livedata:2.8.2")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation ("com.google.dagger:hilt-android:2.46")// replace x with the latest version
+    kapt ("com.google.dagger:hilt-android-compiler:2.46") // replace x with the latest version
 
 
 }

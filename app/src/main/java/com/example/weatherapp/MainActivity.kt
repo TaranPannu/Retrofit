@@ -11,12 +11,16 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.weatherapp.di.ApplicationClass
 import org.w3c.dom.Text
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var weatherViewModelFactory: WeatherViewModelFactory
     private lateinit var weatherViewModel: WeatherViewModel
-    private lateinit var weatherViewModelFactory: WeatherViewModelFactory
-    private lateinit var repo: Repo
+
+    //    private lateinit var repo: Repo
     private lateinit var loader: ProgressBar
 
     private lateinit var editCityName: EditText
@@ -27,13 +31,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+//loader.visibility=View.GONE
+        (application as ApplicationClass).applicationComponent.inject(this)
         init()
         btnGetWeather.setOnClickListener {
             weatherViewModel.getWeatherDetail(editCityName.text.toString())
         }
-        val cityName = "Delhi"
-        weatherViewModel.getWeatherDetail(cityName)
+//        val cityName = "Delhi"
+//        weatherViewModel.getWeatherDetail(cityName)
 
         weatherViewModel.weatherDetailLiveData.observe(this)
         {
@@ -67,8 +72,8 @@ class MainActivity : AppCompatActivity() {
     }
     private fun init()
     {
-        repo = Repo(RetrofitBuilder.getInstance())
-        weatherViewModelFactory = WeatherViewModelFactory(repo)
+//        repo = Repo(RetrofitBuilder.getInstance())
+//        weatherViewModelFactory = WeatherViewModelFactory(repo)
         weatherViewModel = ViewModelProvider(this, weatherViewModelFactory).get(WeatherViewModel::class.java)
         loader =findViewById(R.id.progBar)
 
